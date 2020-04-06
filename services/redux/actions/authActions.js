@@ -11,26 +11,26 @@ export function signInEmail (email){
    console.log(email);
    return{
       type: SIGNINEMAIL,
-      payload: email
+      email
    };
 }
 export function signInPhotoUrl(photourl){
    
    return{
       type: SIGNINPHOTOURL,
-      payload: photourl
+      photourl
    };
 }
  export function signInUid(uid){
     return{
       type: SIGNINUID,
-      payload: uid
+      uid
     }
  }
  export function signInUsername (username){
     return{
       type: SIGNINUSERNAME,
-      payload: username
+      username
     }
  }
 

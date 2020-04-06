@@ -1,12 +1,14 @@
 import { SIGNINEMAIL, SIGNOUT } from '../actions/authActions';
 
-const emailReducer = (state = {value: null}, action) => {
+function emailReducer (state = {email: null}, action) {
+    console.log(action.email);
     switch (action.type) {
         case SIGNINEMAIL:
-            console.log(action.payload);
-            return {...state, value: action.payload};
+            return Object.assign({}, state, {
+                email: action.email
+            })
         case SIGNOUT:
-            return {...state, value: null};
+            return {...state, email: null};
         default:
             return {...state};
     }

@@ -1,11 +1,11 @@
 import { SIGNINUID, SIGNOUT } from '../actions/authActions';
 
-const uidReducer = (state = {value: null}, action) => {
+const uidReducer = (state = {uid: null}, action) => {
     switch (action.type) {
         case SIGNINUID:
-            return {...state, value: action.payload};
+            return {...state, uid: action.payload};
         case SIGNOUT:
-            return {...state, value: null};
+            return {...state, uid: null};
         default:
             return {...state};
     }

@@ -1,11 +1,11 @@
 import { SIGNINUSERNAME, SIGNOUT } from '../actions/authActions';
 
-const usernameReducer = (state = {value: null}, action) => {
+const usernameReducer = (state = {username: null}, action) => {
     switch (action.type) {
         case SIGNINUSERNAME:
-            return {...state, value: action.payload};
+            return {...state, username: action.payload};
         case SIGNOUT:
-            return {...state, value: null};
+            return {...state, username: null};
         default:
             return {...state};
     }

@@ -5,10 +5,10 @@ import usernameReducer from './usernameReducer';
 import {combineReducers} from 'redux';
 
 const userReducer = combineReducers({
-    email: emailReducer,
-    photourl: photourlReducer,
-    uid: uidReducer,
-    username: usernameReducer
+    emailReducer,
+    photourlReducer,
+    uidReducer,
+    usernameReducer
 })
 
 export default userReducer;
