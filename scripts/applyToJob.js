@@ -1,7 +1,6 @@
 import {auth, db} from '../services/firebase';
 
 function applyToJob(JobID, currentEmployeeFlag){
-    var error;
     if(auth.currentUser===null){
         return;
     }
@@ -13,13 +12,11 @@ function applyToJob(JobID, currentEmployeeFlag){
         .concat("s/").concat(auth.currentUser.uid));
     var jobApplicationsListRef=db.ref("/Associations/Companies/JobOpenings/".concat(JobID));
 
-    error=userApplicationsListRef.once("value", function(snapshot){
-        console.log(snapshot.val());
+    userApplicationsListRef.once("value", function(snapshot){
         if(snapshot.val()===null) return;
         var userApplicationsList=snapshot.val().Applications;
         var userApplicationsListAsArray=userApplicationsList.split(',');
-        console.log(userApplicationsListAsArray);
-        if(userApplicationsListAsArray.includes(auth.currentUser.uid)){
+        if(userApplicationsListAsArray.includes(JobID)){
             return "You already applied!"
         }
         else if(userApplicationsListAsArray.length>20){
@@ -29,30 +26,34 @@ function applyToJob(JobID, currentEmployeeFlag){
             userApplicationsListRef.update({
                 "Applications": userApplicationsList.concat(JobID).concat(",")
             })
+            userApplicationsListRef.once("value", function(snapshot){
+                console.log(snapshot.val());
+            })
             return "You applied!";
         }
     });
     
-    error=jobApplicationsListRef.once("value", function(snapshot){
-        console.log(snapshot.val());
+    jobApplicationsListRef.once("value", function(snapshot){
         if(snapshot.val()===null) return;
         var jobApplicationsList=snapshot.val().Applications;
         var jobApplicationsListAsArray=jobApplicationsList.split(',');
-        if(jobApplicationsListAsArray.includes(JobID)){
+        if(jobApplicationsListAsArray.includes(auth.currentUser.uid)){
             return "You already applied!"
         }
-        else if(jobApplicationsListAsArray.length > 99){
+        else if(jobApplicationsListAsArray.length > 100){
             return "This job has too many applications!"
         }
         else{
             jobApplicationsListRef.update({
                 "Applications": jobApplicationsList.concat(auth.currentUser.uid).concat(",")
             })
+            jobApplicationsListRef.once("value", function(snapshot){
+                console.log(snapshot.val());
+            })
             return "You applied!";
         }
     });
-    return error;
-        
+
         
     
 }

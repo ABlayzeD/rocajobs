@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import { db , auth} from '../services/firebase';
-import SignIn from '../components/SignInForm';
 import {connect} from 'react-redux';
 import store from '../services/redux/store';
 import { Form, Input, Button, Checkbox } from 'antd';
