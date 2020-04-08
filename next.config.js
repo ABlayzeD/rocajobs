@@ -1,11 +1,15 @@
 /* eslint-disable */
-const withLess = require('@zeit/next-less')
-const dotEnvResult = require('dotenv').config()
+const withLess = require('@zeit/next-less');
+const firebase = require("firebase/app");
+require("firebase/auth");
+
 
 const prod = process.env.NODE_ENV === 'production'
-
-if (dotEnvResult.error) {
-  throw dotEnvResult.error
+if(!prod){
+  const dotEnvResult = require('dotenv').config({silent: true})
+  if (dotEnvResult.error) {
+    throw dotEnvResult.error
+  }
 }
 
 module.exports = withLess({
@@ -28,6 +32,7 @@ module.exports = withLess({
     modifyVars: {'primary-color': '#FFD700'}, // make your antd custom effective
   },
   webpack: (config, { isServer }) => {
+
     if (isServer) {
       const antStyles = /antd\/.*?\/style.*?/
       const origExternals = [...config.externals]
@@ -42,7 +47,7 @@ module.exports = withLess({
         },
         ...(typeof origExternals[0] === 'function' ? [] : origExternals),
       ]
-
+      
       config.module.rules.unshift({
         test: antStyles,
         use: 'null-loader',

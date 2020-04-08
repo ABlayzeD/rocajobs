@@ -5,14 +5,13 @@ import {headerCls} from './styles';
 import {connect} from 'react-redux';
 
 class Header extends Component {
-  
   render() {
     return (
       <div css={headerCls}>
         <nav className="menuBar">
           <div className="logo">
             <Link href="/home">
-              <img src="/images/logo.jpg" alt={this.props.username} />
+              <img src="/images/logo.jpg" alt={"Logo"} />
             </Link>
           </div>
           <div className="menuCon">
@@ -26,13 +25,5 @@ class Header extends Component {
     
   }
 }
-function mapStateToProps(state){
-  return {
-      username: state.username,
-      photourl: state.photourl,
-      uid: state.uid,
-      username: state.displayName
-  }
-}
 
-export default connect(mapStateToProps)(Header);
+export default Header;

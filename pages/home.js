@@ -3,16 +3,35 @@ import Footer from '../components/layout/Footer';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import HomeBody from '../components/layout/HomeBody';
-import { useContext } from 'react';
-import UserContext from '../components/UserContext';
+import {connect} from 'react-redux';
+import { render } from 'react-dom';
 
-export default function home() {
-  
-  return (
-  <Container>
-    <Header />
-     <HomeBody /> 
-    <Footer />
-  </Container>
-  );
+
+class Home extends React.Component{
+  static getInitialProps({store}){
+
+  }
+
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return(
+      <Container>
+        <Header />
+        <HomeBody />
+        <Footer />
+      </Container>
+      );
+    }
 }
+  
+
+  const mapStateToProps = state => ({
+    email: state.emailReducer,
+    photourl: state.photourlReducer,
+    uid: state.uidReducer,
+    username: state.usernameReducer
+  })
+  export default connect(mapStateToProps)(Home);

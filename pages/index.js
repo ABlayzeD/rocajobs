@@ -2,9 +2,7 @@ import Link from 'next/link';
 
 
 
-export default function Index() {
-  
-    return (
+const Index = () =>(
       <div>
         <Link href="/login">
           <a>login</a>
@@ -12,4 +10,4 @@ export default function Index() {
         <p>index page (to be removed)</p>
       </div>
     );
-  }
+export default Index;

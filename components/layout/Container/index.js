@@ -21,4 +21,5 @@ Container.propTypes = {
  children: oneOfType([node, string]),
  title: string,
 };
+
 export default Container;

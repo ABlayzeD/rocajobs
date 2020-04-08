@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import { db , auth} from '../services/firebase';
@@ -8,11 +8,14 @@ import store from '../services/redux/store';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useRouter } from 'next/router';
 import { signInEmail, signInPhotoUrl, signInUid, signInUsername } from '../services/redux/actions/authActions';
-import Link from 'next/link';
 
 
-function Login() {
+function Signup() {
   const router=useRouter();
+  const [checked,setChecked] = useState(false);
+  function onChange(e) {
+    setChecked(!checked);
+  }
   auth.onAuthStateChanged(function(user) {
     if (user!=undefined) {
       // User is signed in.
@@ -21,17 +24,22 @@ function Login() {
           store.dispatch(signInUid(user.uid));
           store.dispatch(signInUsername(user.displayName));
       router.push("/home");
+      var applicantsRef = db.ref("/Associations/Companies/Applicants");
+      console.log(user.displayName);
+      applicantsRef.child(user.uid).set({
+        Applications: "",
+        FormerEmployee: checked,
+        Resume: ""
+      });
     }
   });
   const onFinish = (values) => {
     console.log('Finish:', values);
-    auth.signInWithEmailAndPassword(values.email, values.password).catch(function(error) {
-    console.log(error.code);
-    console.log(error.message);
-    // ...
-  });
+    auth.createUserWithEmailAndPassword(values.email, values.password).catch(function(error) {
+      console.log(error.code);
+      console.log(error.message);  
+    });
   };
-
   return (
     <Form
       name="normal_login"
@@ -62,7 +70,7 @@ function Login() {
         rules={[
           {
             required: true,
-            message: 'Please input your Password!',
+            message: 'Please input your password!',
           },
         ]}
       >
@@ -71,23 +79,31 @@ function Login() {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item>
-        <a className="login-form-forgot" href="" style={{marginLeft: '40%'}}>
-          Forgot password
-        </a>
+      <Form.Item
+        name="name"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your full name!',
+          },
+        ]}
+      >
+        <Input
+          placeholder="Full name"
+        />
       </Form.Item>
-
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
+          Create Account
         </Button>
-        Or <Link href="/signup">
-          <a>register now!</a>
-        </Link>
+      </Form.Item>
+      <Form.Item>
+        Former Employee?
+        <Checkbox onChangeOne={onChange}/>
       </Form.Item>
     </Form>
+    
   );
 };
 
-
-export default Login;
+export default Signup;

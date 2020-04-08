@@ -8,7 +8,6 @@ export const SIGNOUT = "SIGNOUT";
 
 //Action Creator
 export function signInEmail (email){
-   console.log(email);
    return{
       type: SIGNINEMAIL,
       email
@@ -34,7 +33,13 @@ export function signInPhotoUrl(photourl){
     }
  }
 
-export const signOut = () => ({
-    type: SIGNOUT
-});
+export function signOut (){
+    return{
+       type: SIGNOUT,
+      email: null,
+      photourl: null,
+      uid: null,
+      username: null
+    }
+}
 

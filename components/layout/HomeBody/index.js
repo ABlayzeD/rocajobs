@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch from 'algoliasearch';
 import React, { Component } from 'react';
 import {homeCls} from './styles';
 import {
@@ -11,6 +11,8 @@ import {
     RefinementList,
     Configure,
   } from 'react-instantsearch-dom';
+  import {Button} from 'antd';
+import applyToJob from '../../../scripts/applyToJob';
 
 
   // configure algolia
@@ -26,11 +28,30 @@ function Hit(props) {
   return (
     <div css="homeCls">
       <div className="hit-name">
-        <Highlight attribute="JobOpening_ID" hit={props.hit} />
+        <Highlight attribute="title" hit={props.hit} />
       </div>
       <div className="hit-description">
         <Highlight attribute="Description" hit={props.hit} />
       </div>
+      <b>Required Level of Education:</b>
+      <div className="hit-leveleducation">
+        <Highlight attribute="LevelEducation" hit={props.hit} />
+      </div>
+      <b>Salary:</b>
+      <div className="hit-salary">
+        <Highlight attribute="Salary" hit={props.hit} />
+      </div>
+      <b>State:</b>
+      <div className="hit-state">
+        <Highlight attribute="State" hit={props.hit} />
+      </div>
+      
+      <Button type="dashed" onClick={function(){
+        applyToJob(props.hit.objectID)
+        }
+      }>
+        Apply!
+      </Button>
     </div>
   );
 }
