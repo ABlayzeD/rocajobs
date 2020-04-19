@@ -55,8 +55,11 @@ From package.json:
 >  }
 
 The Pages folder contains a list of each page component's lifecycles while running.
+
 The Components folder contains stylized components to use during render.
+
 The Scripts folder contains useful scripts for indexing data from Firebase for clientside searching, as well as scripts for interacting with Firebase as a user or admin/employer.
+
 The Public folder just contains the system-wide logo.
 
 ### Issues:
