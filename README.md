@@ -14,24 +14,43 @@ From package.json:
 >    "@zeit/next-less": "^1.0.1",
 
 >    "algoliasearch": "^4.0.3",
+
 >    "antd": "^4.1.1",
+
 >    "anyfileparser": "^1.1.1",
+
 >    "babel-plugin-import": "^1.7.0",
+
 >    "dotenv": "^8.2.0",
+
 >    "emotion": "^10.0.27",
+
 >    "emotion-server": "^10.0.27",
+
 >    "express": "^4.17.1",
+
 >    "firebase": "^7.13.2",
+
 >    "less": "^3.11.1",
+
 >    "next": "latest",
+
 >    "next-redux-wrapper": "^5.0.0",
+
 >    "null-loader": "^3.0.0",
+
 >    "react": "^16.7.0",
+
 >    "react-dom": "^16.7.0",
+
 >    "react-firebase-file-uploader": "^2.4.3",
+
 >    "react-instantsearch-dom": "^6.3.0",
+
 >    "react-redux": "^7.2.0",
+
 >    "redux": "^4.0.5"
+
 >  }
 
 The Pages folder contains a list of each page component's lifecycles while running.
