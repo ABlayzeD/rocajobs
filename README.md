@@ -63,19 +63,24 @@ There are some files that remain that might be unnecessary, as well as unnecessa
 things were still be implemented; some functionality is broken. Namely:
 
 f) filter applicants
+
 g) prioritize some applications
+
 h) communicate with applicants
+
 i) keep the application process organized for the search committee
+
 j) share messages
+
 k) generate reports
 
 Otherwise, the project was also configured under evolving conditions. Some packages have been imported and are as yet unused, but they should not affect present functionality of the source code.
 
 # To run the code:
-1. Install yarn v1.22.4 (https://classic.yarnpkg.com/en/docs/install#windows-stable)
-2. Download code from Github.
-3. Open CMD
-4. cd to project folder
-5. enter "yarn install" into the cmd window
-6. When it finishes, enter "yarn start"
-7. Navigate to localhost:3000 in a browser
+#### 1. Install yarn v1.22.4 (https://classic.yarnpkg.com/en/docs/install#windows-stable)
+#### 2. Download code from Github.
+#### 3. Open CMD
+#### 4. cd to project folder
+#### 5. enter "yarn install" into the cmd window
+#### 6. When it finishes, enter "yarn start"
+#### 7. Navigate to localhost:3000 in a browser
