@@ -2,11 +2,17 @@
 This project allows internal and external users to apply to jobs within the ROCA.sa network.
 From package.json:
 >  "dependencies": {
+
 >    "@ant-design/icons": "^4.0.5",
+
 >    "@emotion/babel-preset-css-prop": "^10.0.27",
+
 >    "@emotion/core": "^10.0.27",
+
 >    "@emotion/styled": "^10.0.27",
+
 >    "@zeit/next-less": "^1.0.1",
+
 >    "algoliasearch": "^4.0.3",
 >    "antd": "^4.1.1",
 >    "anyfileparser": "^1.1.1",
