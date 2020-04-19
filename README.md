@@ -59,13 +59,16 @@ The Scripts folder contains useful scripts for indexing data from Firebase for c
 The Public folder just contains the system-wide logo.
 
 ### Issues:
-There are some files that remain that might be unnecessary, as well as unnecessary code. The system's development was terminated while things were still be implemented; some functionality is broken. Namely:
+There are some files that remain that might be unnecessary, as well as unnecessary code. The system's development was terminated while
+things were still be implemented; some functionality is broken. Namely:
+
 f) filter applicants
 g) prioritize some applications
 h) communicate with applicants
 i) keep the application process organized for the search committee
 j) share messages
 k) generate reports
+
 Otherwise, the project was also configured under evolving conditions. Some packages have been imported and are as yet unused, but they should not affect present functionality of the source code.
 
 # To run the code:
