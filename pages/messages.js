@@ -11,7 +11,7 @@ export default function Messages() {
     return (
       <Container>
         <Header />
-          <Chat />
+          <a>Messages Page</a>
         <Footer />
       </Container>
     );

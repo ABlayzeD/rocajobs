@@ -39,7 +39,7 @@ render(){
     ) : (
         <Container>
           <AdminHeader />
-            
+            <a>Admin Reports Page</a>
           <Footer />
         </Container>
         );
