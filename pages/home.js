@@ -1,23 +1,35 @@
 import React from 'react';
-import Footer from '../components/layout/Footer';
+import Footer from '../components/layout/user/Footer';
 import Container from '../components/layout/Container';
-import Header from '../components/layout/Header';
-import HomeBody from '../components/layout/HomeBody';
+import Header from '../components/layout/user/Header';
+import HomeBody from '../components/layout/user/HomeBody';
 import {connect} from 'react-redux';
 import { render } from 'react-dom';
+import {auth} from '../services/firebase';
 
 
 class Home extends React.Component{
-  static getInitialProps({store}){
-
-  }
-
   constructor(props){
     super(props);
+    this.state={
+      loading: true
   }
+}
+async componentDidMount(){
+  let auth = await this.checkAuth();
+  return auth;
+}
+async checkAuth(){
+    if(auth.currentUser!=null) this.setState({loading: false})
+}
 
-  render(){
-    return(
+render(){
+    
+    return this.state.loading ? (
+            <div>
+                Loading...
+            </div>
+    ) : (
       <Container>
         <Header />
         <HomeBody />

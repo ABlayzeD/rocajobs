@@ -1,4 +1,4 @@
-import {db} from '../../services/firebase';
+import {db} from '../../../services/firebase';
 const algoliasearch = require('algoliasearch');
 
 // configure algolia
@@ -6,19 +6,17 @@ const algolia = algoliasearch(
     process.env.ALGOLIA_APP_ID,
     process.env.ALGOLIA_API_KEY
   );
-  const index = algolia.initIndex(process.env.ALGOLIA_JOB_OPENINGS);
+const index = algolia.initIndex("ADMINS");
 
-function reindexFirebaseToAlgolia(){
+function reindexAdminsFirebaseToAlgolia(){
   // Get all contacts from Firebase
-  console.log("Made it...");
-  db.ref('/Associations/Companies/JobOpenings').once('value', jobOpenings => {
+  db.ref('/Admins').once('value', admins => {
       // Build an array of all records to push to Algolia
       const records = [];
-      jobOpenings.forEach(jobopening => {
+      admins.forEach(admin => {
         // get the key and data from the snapshot
-        const childKey = jobopening.key;
-        console.log(jobopening.key);
-        const childData = jobopening.val();
+        const childKey = admin.key;
+        const childData = admin.val();
         // We set the Algolia objectID as the Firebase .key
         childData.objectID = childKey;
         // Add object for indexing
@@ -27,14 +25,14 @@ function reindexFirebaseToAlgolia(){
     
       // Add or update new objects
       index
-        .saveObjects(records)
+        .replaceAllObjects(records)
         .then(() => {
-          console.log('Job openings imported into Algolia');
+          console.log('Admins imported into Algolia');
         })
         .catch(error => {
-          console.error('Error when importing job openings into Algolia', error);
+          console.error('Error when importing admins into Algolia', error);
           process.exit(1);
         });
     });
 }
-export default reindexFirebaseToAlgolia;
+export default reindexAdminsFirebaseToAlgolia;

@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import 'firebase/auth';
 import 'firebase/database';
-
+import 'firebase/storage';
 const config = {
   apiKey: process.env.FIREBASE_apiKey,
   authDomain: process.env.FIREBASE_authDomain,
@@ -12,14 +12,17 @@ const config = {
 };
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(config);
+  const app=firebase.initializeApp(config);
 }
 
 const auth = firebase.auth();
 const db = firebase.database();
+const storage = firebase.storage().ref();
+
 
 export {
   auth,
   db,
+  storage,
   firebase
 }

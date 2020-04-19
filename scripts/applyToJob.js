@@ -1,20 +1,13 @@
 import {auth, db} from '../services/firebase';
 
-function applyToJob(JobID, currentEmployeeFlag){
-    if(auth.currentUser===null){
-        return;
-    }
-    var typeOfApplicant="Applicant"
-    if(currentEmployeeFlag===1){
-        typeOfApplicants="Employee"
-    }
-    var userApplicationsListRef=db.ref("/Associations/Companies/".concat(typeOfApplicant)
-        .concat("s/").concat(auth.currentUser.uid));
+function applyToJob(JobID){
+    var userApplicationsListRef=db.ref("/Associations/Companies/JobOpenings/Applicants/".concat(auth.currentUser.uid));
     var jobApplicationsListRef=db.ref("/Associations/Companies/JobOpenings/".concat(JobID));
 
     userApplicationsListRef.once("value", function(snapshot){
-        if(snapshot.val()===null) return;
+        
         var userApplicationsList=snapshot.val().Applications;
+        if(userApplicationsList==null) return;
         var userApplicationsListAsArray=userApplicationsList.split(',');
         if(userApplicationsListAsArray.includes(JobID)){
             return "You already applied!"

@@ -10,9 +10,11 @@ import {
     ClearRefinements,
     RefinementList,
     Configure,
+    HitsPerPage
   } from 'react-instantsearch-dom';
   import {Button} from 'antd';
-import applyToJob from '../../../scripts/applyToJob';
+import applyToJob from '../../../../scripts/applyToJob';
+import { db } from '../../../../services/firebase';
 
 
   // configure algolia
@@ -56,13 +58,24 @@ function Hit(props) {
   );
 }
 
-
 class HomeBody extends Component {
     render() {
+      const hitsList=[
+        {label: '8 hits per page', value: 8},
+        {label: '16 hits per page', value: 16},
+        {label: '24 hits per page', value: 24}
+      ];
         return (
               <div css={homeCls}>
                 <div className="ais-InstantSearch">
-                  <InstantSearch searchClient={searchClient} indexName={index}>
+                  <InstantSearch
+                  searchClient={searchClient}
+                  indexName={index}
+                  initialUiState= {{
+                    indexName: {
+                      similarQuery: '5',
+                      }
+                  }}>
                   <div className="left-panel">
                     <ClearRefinements />
                     <h2>Salary</h2>
@@ -71,13 +84,18 @@ class HomeBody extends Component {
                     <RefinementList attribute="State" />
                     <h2>Level of Education</h2>
                     <RefinementList attribute="LevelEducation" />
-                    <Configure hitsPerPage={8} />
+                    
                   </div>
                   <div className="right-panel">   
                     <SearchBox />
                     <Hits hitComponent={Hit}/>
                     <Pagination />
+                    <HitsPerPage 
+                    className='ais-HitsPerPage'
+                    defaultRefinement={8}
+                    items={hitsList}/>
                   </div>
+                  
                   </InstantSearch>
                 </div>   
             </div>

@@ -1,60 +1,110 @@
-import React from 'react';
-import Footer from '../components/layout/Footer';
+import React, {PureComponent} from 'react';
+import Footer from '../components/layout/user/Footer';
 import Container from '../components/layout/Container';
-import Header from '../components/layout/Header';
+import Header from '../components/layout/user/Header';
 import { List } from 'antd';
 import {auth, db} from '../services/firebase';
 
-function getUserApplicationsAsArray(currentEmployeeFlag){
-  var typeOfApplicant="Applicant"
-  if(currentEmployeeFlag===1){
-      typeOfApplicants="Employee"
+export default class Applications extends PureComponent{
+  constructor(props){
+    super(props);
+    this.state={
+      loading: true,
+      applications: null
+    }
   }
-  var userApplicationsListRef=db.ref("/Associations/Companies/".concat(typeOfApplicant)
-      .concat("s/").concat(auth.currentUser.uid));
-
-  return userApplicationsListRef.once("value", function(snapshot){
-      if(snapshot.val()===null) return;
-      var userApplicationsList=snapshot.val().Applications;
-      if(userApplicationsList===""){
-        return;
+  async componentDidMount(){
+    let auth = await this.checkAuth();
+    let applications = await this.getUserApplicationsAsArray();
+    await new Promise(resolve =>{setTimeout(resolve, 100);})
+    this.setState({loading: !auth, applications: applications});
+  }
+  async checkAuth(){
+      var user = auth.currentUser;
+      if(user!=null){
+        return true;
       }
-      var userAppsArray=userApplicationsList.split(',');
-      var data={};
-      userAppsArray.forEach(JobID => {
-        var jobApplicationsListRef=db.ref("/Associations/Companies/JobOpenings/".concat(JobID));
-        jobApplicationsListRef.once("value", function(snapshot){
-          if(snapshot.val()===null) return;
-          var job=snapshot.key;
-          var jobTitle=snapshot.val().title;
-          var jobDesc=snapshot.val().Description;
-          console.log(job)
-          if(job=="JobOpenings") return;
-          data[job]={title: jobTitle, desc: jobDesc}
-          console.log(data);
-        });
-    });
-  });
-}
-
-
-export default function Applications() {
-    const data=getUserApplicationsAsArray(0);
-    return (
-      <Container>
-        <Header />
-          <List
-          dataSource={data}
-          itemLayout="horizontal"
-          className="my-list"
-          renderItem={item => (
-            <List.Item 
-              title={item.title}
-              description={item.desc}>
-            </List.Item>
-          )}
-          />
-        <Footer />
-      </Container>
-    );
+      else{
+        return false
+      }
   }
+  async getUserApplicationsAsArray(){
+    return db.ref("/Associations/Companies/JobOpenings/Applicants/".concat(auth.currentUser.uid))
+      .once("value").then(function(snapshot){
+        if(snapshot.val()===null) return [];
+        var userApplicationsList=snapshot.val().Applications;
+        if(userApplicationsList===""){
+          return [];
+        }
+        var userAppsArray=userApplicationsList.split(',');
+        userAppsArray.pop();
+        var data=Array();
+        var index=0;
+        userAppsArray.forEach(JobID => {
+          var jobApplicationsListRef=db.ref("/Associations/Companies/JobOpenings/".concat(JobID));
+          jobApplicationsListRef.once("value", function(snapshot){
+            var job=snapshot.key;
+            var jobTitle=snapshot.val().title;
+            var jobDesc=snapshot.val().Description;
+            if(job!="SearchCommittees" && job!="Applicants" && snapshot.val()!=null)
+              data.push({title: jobTitle, desc: jobDesc});
+              index++;
+          });
+      });
+      return data;
+    });
+  }
+  render(){
+    const applicationsloading=(this.state.applications==null);
+    console.log(applicationsloading);
+    if(!auth){
+      return (
+        <div>
+            Loading...
+        </div>
+        )
+    }
+    if(applicationsloading){
+      return (
+        <Container>
+          <Header />
+            <List
+            header="Applications"
+            itemLayout="horizontal"
+            loading={true}
+            />
+          <Footer />
+        </Container>
+      );
+    }
+    if(auth && !applicationsloading){
+      console.log("HUH");
+      const applications=Array.from(this.state.applications);
+      if(applications!=null){
+        applications.forEach((item) =>{
+          console.log(item.title);
+        })
+      }
+      return(
+        <Container>
+          <Header /> 
+              <List
+                  header="Applications"
+                  dataSource={applications}
+                  itemLayout="horizontal"
+                  renderItem={item => (
+                    <List.Item>
+                      <a></a>
+                      <List.Item.Meta
+                      title={item.title}
+                      description={item.desc}
+                      />
+                    </List.Item>
+                  )}
+                  /> 
+            <Footer />
+          </Container>
+        );
+    }
+  }
+}

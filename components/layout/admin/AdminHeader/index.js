@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
-import RightMenu from './RightMenu';
+import AdminRightMenu from './AdminRightMenu';
 import {headerCls} from './styles';
 import {connect} from 'react-redux';
 
-class Header extends Component {
+class AdminHeader extends Component {
   render() {
     return (
       <div css={headerCls}>
         <nav className="menuBar">
           <div className="logo">
-            <Link href="/home">
-              <img src="/images/logo.jpg" alt={"Logo"} />
+            <Link href="/admin_console">
+              <img src="/images/logo.png" alt={"Logo"} />
             </Link>
           </div>
           <div className="menuCon">
             <div className="rightMenu">
-              <RightMenu />
+              <AdminRightMenu />
             </div>
           </div>
         </nav>
@@ -26,4 +26,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default AdminHeader;

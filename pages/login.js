@@ -19,7 +19,14 @@ function Login() {
           store.dispatch(signInPhotoUrl(user.photourl));
           store.dispatch(signInUid(user.uid));
           store.dispatch(signInUsername(user.displayName));
-      router.push("/home");
+          db.ref('/Admins/'.concat(user.uid)).once("value", function(snapshot){
+              if(snapshot.val()!==null){
+                  router.push("/admin_console");
+              }
+              else
+                router.push("/home");
+            })
+      
     }
   });
   const onFinish = (values) => {

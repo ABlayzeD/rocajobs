@@ -1,6 +1,5 @@
 import React from 'react';
 import App from 'next/app';
-import {withRouter} from 'next/router';
 import Login from './login';
 import SignUp from './signup';
 import {Provider} from "react-redux";
@@ -16,21 +15,12 @@ class Rocajobs extends App {
   }
   render() {
     const {Component, pageProps, store } = this.props;
-    /**if(auth.currentUser===undefined && Component!==<SignUp/>){
-      return(
-        <Provider store={store}>
-            <Login {...pageProps} />
-        </Provider>
-      );
-    }
-    **/
         return (
           <Provider store={store}>
               <Component {...pageProps} />
           </Provider>
 
         );
-
 
     }
 }

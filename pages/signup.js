@@ -4,9 +4,10 @@ import firebase from 'firebase';
 import { db , auth} from '../services/firebase';
 import {connect} from 'react-redux';
 import store from '../services/redux/store';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, notification } from 'antd';
 import { useRouter } from 'next/router';
 import { signInEmail, signInPhotoUrl, signInUid, signInUsername } from '../services/redux/actions/authActions';
+import ReactDOM from 'react-dom';
 
 
 function Signup() {
@@ -15,6 +16,15 @@ function Signup() {
   function onChange(e) {
     setChecked(!checked);
   }
+  const openNotification = (error) => {
+    notification.open({
+      message: 'Error:',
+      description: error,
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  };
   auth.onAuthStateChanged(function(user) {
     if (user!=undefined) {
       // User is signed in.
@@ -23,7 +33,7 @@ function Signup() {
           store.dispatch(signInUid(user.uid));
           store.dispatch(signInUsername(user.displayName));
       router.push("/home");
-      var applicantsRef = db.ref("/Associations/Companies/Applicants");
+      var applicantsRef = db.ref("/Associations/Companies/JobOpenings/Applicants");
       console.log(user.displayName);
       applicantsRef.child(user.uid).set({
         Applications: "",
@@ -32,12 +42,20 @@ function Signup() {
       });
     }
   });
-  const onFinish = (values) => {
+  async function onFinish (values){
     console.log('Finish:', values);
-    auth.createUserWithEmailAndPassword(values.email, values.password).catch(function(error) {
-      console.log(error.code);
-      console.log(error.message);  
+    await auth.createUserWithEmailAndPassword(values.email, values.password).catch(function(error) {
+      if(error.code!=null){
+        openNotification(error.message);
+        console.log(error.code);
+        console.log(error.message);
+      }
     });
+    await db.ref("/Associations/Companies/JobOpenings/Applicants/"
+    .concat(auth.currentUser.uid)).update({
+      Name: values.name
+    })
+
   };
   return (
     <Form

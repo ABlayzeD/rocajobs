@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import { Menu, Dropdown, Button } from 'antd';
-import { signOut } from '../../../services/redux/actions/authActions';
-import { auth } from '../../../services/firebase';
+import { signOut } from '../../../../services/redux/actions/authActions';
+import { auth } from '../../../../services/firebase';
 import {withRouter} from 'next/router';
-import store from '../../../services/redux/store';
+import store from '../../../../services/redux/store';
 
 const menu= (
   <Menu >
