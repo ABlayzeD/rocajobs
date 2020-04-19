@@ -82,6 +82,8 @@ Otherwise, the project was also configured under evolving conditions. Some packa
 #### 2. Download code from Github.
 #### 3. Open CMD
 #### 4. cd to project folder
-#### 5. enter "yarn install" into the cmd window
+#### 5. Download .env file from this link: https://drive.google.com/drive/folders/1K-5Ni-VfMwOZjHo4527zN8hGUP005HJ9?usp=sharing
+#### 6. Copy the .env file to the project folder
+#### 5. in the CMD window, enter "yarn install"
 #### 6. When it finishes, enter "yarn start"
 #### 7. Navigate to localhost:3000 in a browser
