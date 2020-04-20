@@ -81,7 +81,7 @@ e) ability to search and apply to jobs
 
 ### Issues:
 There are some files that remain that might be unnecessary, as well as unnecessary code. The system's development was terminated while
-things were still be implemented; some functionality is broken. Namely:
+things were still being implemented, so some functionality is broken. Namely:
 
 f) filter applicants
 
