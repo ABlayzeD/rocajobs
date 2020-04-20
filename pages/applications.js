@@ -94,7 +94,7 @@ export default class Applications extends PureComponent{
                   itemLayout="horizontal"
                   renderItem={item => (
                     <List.Item>
-                      <a></a>
+                      <h>Applied for:</h>
                       <List.Item.Meta
                       title={item.title}
                       description={item.desc}
