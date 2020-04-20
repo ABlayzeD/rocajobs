@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase';
 import { db , auth} from '../services/firebase';
-import {connect} from 'react-redux';
 import store from '../services/redux/store';
 import { Form, Input, Button, Checkbox, notification } from 'antd';
 import { useRouter } from 'next/router';
 import { signInEmail, signInPhotoUrl, signInUid, signInUsername } from '../services/redux/actions/authActions';
-import ReactDOM from 'react-dom';
-
 
 function Signup() {
   const router=useRouter();

@@ -2,7 +2,6 @@ import React from 'react';
 import Footer from '../components/layout/user/Footer';
 import Container from '../components/layout/Container';
 import AdminHeader from '../components/layout/admin/AdminHeader';
-import AdminBody from '../components/layout/admin/AdminBody';
 class admin_reports extends React.Component{
   constructor(props){
     super(props);

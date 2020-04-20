@@ -4,7 +4,6 @@ import Container from '../components/layout/Container';
 import Header from '../components/layout/user/Header';
 import HomeBody from '../components/layout/user/HomeBody';
 import {connect} from 'react-redux';
-import { render } from 'react-dom';
 import {auth} from '../services/firebase';
 
 

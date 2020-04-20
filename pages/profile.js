@@ -4,7 +4,6 @@ import Container from '../components/layout/Container';
 import Header from '../components/layout/user/Header';
 import {auth, db} from '../services/firebase';
 import UploadAvatar from '../components/UploadAvatar';
-import { BlockOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Checkbox, notification } from 'antd';
 import UploadResume from '../components/UploadResume';
 import UploadDocuments from '../components/UploadDocuments';
