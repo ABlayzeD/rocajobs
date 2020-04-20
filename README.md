@@ -62,6 +62,10 @@ The Scripts folder contains useful scripts for indexing data from Firebase for c
 
 The Public folder just contains the system-wide logo.
 
+The Services folder contains configurations for Firebase and Redux.
+
+The project directory's flatspace contains configuration files for next, babel-plugin-import, and express.
+
 ### Issues:
 There are some files that remain that might be unnecessary, as well as unnecessary code. The system's development was terminated while
 things were still be implemented; some functionality is broken. Namely:
