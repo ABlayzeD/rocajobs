@@ -107,3 +107,4 @@ Otherwise, the project was also configured under evolving conditions. Some packa
 #### 5. in the CMD window, enter "yarn install"
 #### 6. When it finishes, enter "yarn start"
 #### 7. Navigate to localhost:3000 in a browser
+#### (During execution, if the site throws an error, navigate back to the login page.)
