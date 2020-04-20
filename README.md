@@ -66,6 +66,19 @@ The Services folder contains configurations for Firebase and Redux.
 
 The project directory's flatspace contains configuration files for next, babel-plugin-import, and express.
 
+### Functionality
+The system has the following functions:
+
+a) web‐based system
+
+b) database
+
+c) security according to the different roles of actors interacting with the system
+
+d) ability to create a profile to start the job search
+
+e) ability to search and apply to jobs
+
 ### Issues:
 There are some files that remain that might be unnecessary, as well as unnecessary code. The system's development was terminated while
 things were still be implemented; some functionality is broken. Namely:
